@@ -12,12 +12,12 @@ var bandsList = []band{
 	{ID: 2, Name: "Opeth"},
 }
 
-func bands() []band {
+func getBands() []band {
 	return bandsList
 }
 
 func loadBands() map[string]band {
-	bands := bands()
+	bands := getBands()
 	res := make(map[string]band, len(bands))
 
 	for _, x := range bands {

@@ -1,0 +1,15 @@
+info:
+  contact: {}
+  description: This is a sample server band server.
+  termsOfService: http://swagger.io/terms/
+  title: Swagger band API
+  version: "1.0"
+paths:
+  /band:
+    get:
+      description: returns a list of all bands
+      responses: {}
+      summary: returns a list of all bands
+      tags:
+      - Bands
+swagger: "2.0"

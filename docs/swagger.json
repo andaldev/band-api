@@ -1,0 +1,22 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample server band server.",
+        "title": "Swagger band API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/band": {
+            "get": {
+                "description": "returns a list of all bands",
+                "tags": [
+                    "Bands"
+                ],
+                "summary": "returns a list of all bands",
+                "responses": {}
+            }
+        }
+    }
+}

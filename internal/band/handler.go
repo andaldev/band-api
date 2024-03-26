@@ -12,8 +12,12 @@ func NewHandlerFunc() *Handler {
 	return &Handler{}
 }
 
+// @Summary returns a list of all bands
+// @Description returns a list of all bands
+// @Tags Bands
+// @Router /band [get]
 func (h *Handler) GetAll(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(loadBands())
+	json.NewEncoder(w).Encode(getBands())
 }
 
 func (h *Handler) FindByID(w http.ResponseWriter, r *http.Request) {

@@ -1,20 +1,38 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a sample server band server.",
-        "title": "Swagger band API",
-        "termsOfService": "http://swagger.io/terms/",
+        "description": "A Band service API in Go",
+        "title": "Band Service API",
         "contact": {},
         "version": "1.0"
     },
     "paths": {
-        "/band": {
+        "/bands": {
             "get": {
                 "description": "returns a list of all bands",
                 "tags": [
                     "Bands"
                 ],
                 "summary": "returns a list of all bands",
+                "responses": {}
+            }
+        },
+        "/bands/{bandId}": {
+            "get": {
+                "description": "returns a band by its id",
+                "tags": [
+                    "Bands"
+                ],
+                "summary": "returns a band by its id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "find band by id",
+                        "name": "bandId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {}
             }
         }

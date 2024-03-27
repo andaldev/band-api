@@ -9,20 +9,38 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "termsOfService": "http://swagger.io/terms/",
         "contact": {},
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/band": {
+        "/bands": {
             "get": {
                 "description": "returns a list of all bands",
                 "tags": [
                     "Bands"
                 ],
                 "summary": "returns a list of all bands",
+                "responses": {}
+            }
+        },
+        "/bands/{bandId}": {
+            "get": {
+                "description": "returns a band by its id",
+                "tags": [
+                    "Bands"
+                ],
+                "summary": "returns a band by its id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "find band by id",
+                        "name": "bandId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {}
             }
         }
@@ -35,8 +53,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "Swagger band API",
-	Description:      "This is a sample server band server.",
+	Title:            "Band Service API",
+	Description:      "A Band service API in Go",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

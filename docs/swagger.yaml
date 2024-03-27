@@ -1,15 +1,27 @@
 info:
   contact: {}
-  description: This is a sample server band server.
-  termsOfService: http://swagger.io/terms/
-  title: Swagger band API
+  description: A Band service API in Go
+  title: Band Service API
   version: "1.0"
 paths:
-  /band:
+  /bands:
     get:
       description: returns a list of all bands
       responses: {}
       summary: returns a list of all bands
+      tags:
+      - Bands
+  /bands/{bandId}:
+    get:
+      description: returns a band by its id
+      parameters:
+      - description: find band by id
+        in: path
+        name: bandId
+        required: true
+        type: string
+      responses: {}
+      summary: returns a band by its id
       tags:
       - Bands
 swagger: "2.0"

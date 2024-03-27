@@ -52,7 +52,7 @@ func (b *BandRepositoryImpl) Update(band model.Band) {
 }
 
 // delete implements BandRepository.
-func (b *BandRepositoryImpl) delete(bandId int) {
+func (b *BandRepositoryImpl) Delete(bandId int) {
 	var band []model.Band
 	result := b.Db.Where("id = ?", bandId).Delete(&band)
 	helper.ErrorPanic(result.Error)

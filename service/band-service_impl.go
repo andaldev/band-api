@@ -2,7 +2,6 @@ package service
 
 import (
 	"band_api/data/request"
-	"band_api/data/response"
 	"band_api/helper"
 	"band_api/model"
 	"band_api/repository"
@@ -38,30 +37,17 @@ func (b *BandServiceImpl) Delete(bandId int) {
 }
 
 // FindAll implements BandService.
-func (b *BandServiceImpl) FindAll() []response.BandResponse {
-	result := b.BandRepository.FindAll()
-
-	var bands []response.BandResponse
-	for _, value := range result {
-		band := response.BandResponse{
-			Name: value.Name,
-		}
-		bands = append(bands, band)
-	}
-
+func (b *BandServiceImpl) FindAll() []model.Band {
+	bands := b.BandRepository.FindAll()
 	return bands
 }
 
 // FindById implements BandService.
-func (b *BandServiceImpl) FindById(bandId int) response.BandResponse {
+func (b *BandServiceImpl) FindById(bandId int) model.Band {
 	bandData, err := b.BandRepository.FindById(bandId)
 	helper.ErrorPanic(err)
 
-	bandResponse := response.BandResponse{
-		Name: bandData.Name,
-	}
-
-	return bandResponse
+	return bandData
 }
 
 // Update implements BandService.

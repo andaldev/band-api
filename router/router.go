@@ -18,6 +18,8 @@ func NewRouter(bandController *controller.BandController) http.Handler {
 	router.HandleFunc("GET /bands", bandController.FindAll)
 	router.HandleFunc("GET /bands/{id}", bandController.FindById)
 	router.HandleFunc("POST /bands", bandController.Create)
+	router.HandleFunc("PATCH /bands/{id}", bandController.Update)
+	router.HandleFunc("DELETE /bands/{id}", bandController.Delete)
 
 	return router
 }

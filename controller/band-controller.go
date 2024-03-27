@@ -34,6 +34,26 @@ func (controller *BandController) Create(w http.ResponseWriter, r *http.Request)
 	w.Header().Add("Content-Type", "application/json")
 }
 
+// @Summary updates a band
+// @Description updates a band
+// @Tags Bands
+// @Param bandId path string true "update band by id"
+// @Param band body request.CreateBandRequest true "Update band"
+// @Router /bands/{bandId} [patch]
+func (controller *BandController) Update(w http.ResponseWriter, r *http.Request) {
+	log.Logger.Info().Msg("Update Band")
+	updateBandRequest := request.UpdateBandRequest{}
+	err := json.NewDecoder(r.Body).Decode(&updateBandRequest)
+	helper.ErrorPanic(err)
+
+	bandId := r.PathValue("id")
+	id, err := strconv.Atoi(bandId)
+	helper.ErrorPanic(err)
+	updateBandRequest.Id = id
+	controller.bandService.Update(updateBandRequest)
+	w.Header().Add("Content-Type", "application/json")
+}
+
 // @Summary returns a list of all bands
 // @Description returns a list of all bands
 // @Tags Bands
@@ -60,4 +80,20 @@ func (controller *BandController) FindById(w http.ResponseWriter, r *http.Reques
 
 	w.Header().Add("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(bandResponse)
+}
+
+// @Summary deletes a band by its id
+// @Description deletes a band by its id
+// @Tags Bands
+// @Param bandId path string true "find band by id"
+// @Router /bands/{bandId} [delete]
+func (controller *BandController) Delete(w http.ResponseWriter, r *http.Request) {
+	log.Logger.Info().Msg("Delete band")
+	bandId := r.PathValue("id")
+	id, err := strconv.Atoi(bandId)
+	helper.ErrorPanic(err)
+
+	controller.bandService.Delete(id)
+
+	w.Header().Add("Content-Type", "application/json")
 }

@@ -61,6 +61,49 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {}
+            },
+            "delete": {
+                "description": "deletes a band by its id",
+                "tags": [
+                    "Bands"
+                ],
+                "summary": "deletes a band by its id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "find band by id",
+                        "name": "bandId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "patch": {
+                "description": "updates a band",
+                "tags": [
+                    "Bands"
+                ],
+                "summary": "updates a band",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "update band by id",
+                        "name": "bandId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update band",
+                        "name": "band",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.CreateBandRequest"
+                        }
+                    }
+                ],
+                "responses": {}
             }
         }
     },

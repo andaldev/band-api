@@ -28,7 +28,7 @@ func main() {
 	routes := router.NewRouter(bandController)
 
 	server := &http.Server{
-		Addr: ":8090",
+		Addr: ":8080",
 	}
 
 	http.ListenAndServe(server.Addr, routes)

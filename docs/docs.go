@@ -9,14 +9,13 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "termsOfService": "http://swagger.io/terms/",
         "contact": {},
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/band": {
+        "/bands": {
             "get": {
                 "description": "returns a list of all bands",
                 "tags": [
@@ -24,6 +23,102 @@ const docTemplate = `{
                 ],
                 "summary": "returns a list of all bands",
                 "responses": {}
+            },
+            "post": {
+                "description": "creates a band",
+                "tags": [
+                    "Bands"
+                ],
+                "summary": "creates a band",
+                "parameters": [
+                    {
+                        "description": "Create band",
+                        "name": "band",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.CreateBandRequest"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/bands/{bandId}": {
+            "get": {
+                "description": "returns a band by its id",
+                "tags": [
+                    "Bands"
+                ],
+                "summary": "returns a band by its id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "find band by id",
+                        "name": "bandId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "delete": {
+                "description": "deletes a band by its id",
+                "tags": [
+                    "Bands"
+                ],
+                "summary": "deletes a band by its id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "find band by id",
+                        "name": "bandId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "patch": {
+                "description": "updates a band",
+                "tags": [
+                    "Bands"
+                ],
+                "summary": "updates a band",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "update band by id",
+                        "name": "bandId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update band",
+                        "name": "band",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.CreateBandRequest"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "request.CreateBandRequest": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 1
+                }
             }
         }
     }
@@ -35,8 +130,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "Swagger band API",
-	Description:      "This is a sample server band server.",
+	Title:            "Band Service API",
+	Description:      "A Band service API in Go",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

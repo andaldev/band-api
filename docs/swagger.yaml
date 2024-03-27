@@ -1,15 +1,80 @@
+definitions:
+  request.CreateBandRequest:
+    properties:
+      name:
+        maxLength: 200
+        minLength: 1
+        type: string
+    required:
+    - name
+    type: object
 info:
   contact: {}
-  description: This is a sample server band server.
-  termsOfService: http://swagger.io/terms/
-  title: Swagger band API
+  description: A Band service API in Go
+  title: Band Service API
   version: "1.0"
 paths:
-  /band:
+  /bands:
     get:
       description: returns a list of all bands
       responses: {}
       summary: returns a list of all bands
+      tags:
+      - Bands
+    post:
+      description: creates a band
+      parameters:
+      - description: Create band
+        in: body
+        name: band
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateBandRequest'
+      responses: {}
+      summary: creates a band
+      tags:
+      - Bands
+  /bands/{bandId}:
+    delete:
+      description: deletes a band by its id
+      parameters:
+      - description: find band by id
+        in: path
+        name: bandId
+        required: true
+        type: string
+      responses: {}
+      summary: deletes a band by its id
+      tags:
+      - Bands
+    get:
+      description: returns a band by its id
+      parameters:
+      - description: find band by id
+        in: path
+        name: bandId
+        required: true
+        type: string
+      responses: {}
+      summary: returns a band by its id
+      tags:
+      - Bands
+    patch:
+      description: updates a band
+      parameters:
+      - description: update band by id
+        in: path
+        name: bandId
+        required: true
+        type: string
+      - description: Update band
+        in: body
+        name: band
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateBandRequest'
+      responses: {}
+      summary: updates a band
       tags:
       - Bands
 swagger: "2.0"

@@ -17,6 +17,7 @@ func NewRouter(bandController *controller.BandController) http.Handler {
 
 	router.HandleFunc("GET /bands", bandController.FindAll)
 	router.HandleFunc("GET /bands/{id}", bandController.FindById)
+	router.HandleFunc("POST /bands", bandController.Create)
 
 	return router
 }

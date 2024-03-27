@@ -28,7 +28,7 @@ func (b *BandServiceImpl) Create(band request.CreateBandRequest) {
 	bandModel := model.Band{
 		Name: band.Name,
 	}
-	b.BandRepository.Save(bandModel)
+	b.BandRepository.Create(bandModel)
 }
 
 // Delete implements BandService.

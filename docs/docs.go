@@ -23,6 +23,25 @@ const docTemplate = `{
                 ],
                 "summary": "returns a list of all bands",
                 "responses": {}
+            },
+            "post": {
+                "description": "creates a band",
+                "tags": [
+                    "Bands"
+                ],
+                "summary": "creates a band",
+                "parameters": [
+                    {
+                        "description": "Create band",
+                        "name": "band",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.CreateBandRequest"
+                        }
+                    }
+                ],
+                "responses": {}
             }
         },
         "/bands/{bandId}": {
@@ -42,6 +61,21 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "request.CreateBandRequest": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 1
+                }
             }
         }
     }

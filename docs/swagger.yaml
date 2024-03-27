@@ -1,3 +1,13 @@
+definitions:
+  request.CreateBandRequest:
+    properties:
+      name:
+        maxLength: 200
+        minLength: 1
+        type: string
+    required:
+    - name
+    type: object
 info:
   contact: {}
   description: A Band service API in Go
@@ -9,6 +19,19 @@ paths:
       description: returns a list of all bands
       responses: {}
       summary: returns a list of all bands
+      tags:
+      - Bands
+    post:
+      description: creates a band
+      parameters:
+      - description: Create band
+        in: body
+        name: band
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateBandRequest'
+      responses: {}
+      summary: creates a band
       tags:
       - Bands
   /bands/{bandId}:

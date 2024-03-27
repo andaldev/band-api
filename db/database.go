@@ -15,15 +15,14 @@ func InitializeDatabase() *gorm.DB {
 
 	helper.ErrorPanic(err)
 
-	// database.Migrator().DropTable(&model.Band{})
-	// database.Clauses(clause.OnConflict{DoNothing: true})
+	database.Migrator().DropTable(&model.Band{})
 	database.AutoMigrate(&model.Band{})
 
 	// loop this with a slice
-	database.FirstOrCreate(&model.Band{Name: "Opeth"})
-	database.FirstOrCreate(&model.Band{Name: "Katatonia"})
-	database.FirstOrCreate(&model.Band{Name: "Tool"})
-	database.FirstOrCreate(&model.Band{Name: "Deftones"})
+	database.Where(&model.Band{Name: "Opeth"}).FirstOrCreate(&model.Band{Name: "Opeth"})
+	database.Where(&model.Band{Name: "Katatonia"}).FirstOrCreate(&model.Band{Name: "Katatonia"})
+	database.Where(&model.Band{Name: "Tool"}).FirstOrCreate(&model.Band{Name: "Tool"})
+	database.Where(&model.Band{Name: "Deftones"}).FirstOrCreate(&model.Band{Name: "Deftones"})
 
 	return database
 }

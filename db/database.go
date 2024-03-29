@@ -18,11 +18,18 @@ func InitializeDatabase() *gorm.DB {
 	database.Migrator().DropTable(&model.Band{})
 	database.AutoMigrate(&model.Band{})
 
-	// loop this with a slice
-	database.Where(&model.Band{Name: "Opeth"}).FirstOrCreate(&model.Band{Name: "Opeth"})
-	database.Where(&model.Band{Name: "Katatonia"}).FirstOrCreate(&model.Band{Name: "Katatonia"})
-	database.Where(&model.Band{Name: "Tool"}).FirstOrCreate(&model.Band{Name: "Tool"})
-	database.Where(&model.Band{Name: "Deftones"}).FirstOrCreate(&model.Band{Name: "Deftones"})
+	initialBands := []model.Band{
+		{Name: "Opeth"},
+		{Name: "Katatonia"},
+		{Name: "Tool"},
+		{Name: "Deftones"},
+		{Name: "Alice in Chains"},
+	}
+
+	for _, band := range initialBands {
+		err := database.Where(&band).FirstOrCreate(&band).Error
+		helper.ErrorPanic(err)
+	}
 
 	return database
 }

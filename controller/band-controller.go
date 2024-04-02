@@ -7,8 +7,6 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
-
-	"github.com/rs/zerolog/log"
 )
 
 type BandController struct {
@@ -27,7 +25,6 @@ func NewBandController(service service.BandService) *BandController {
 // @Param band body request.CreateBandRequest true "Create band"
 // @Router /bands [post]
 func (controller *BandController) Create(w http.ResponseWriter, r *http.Request) {
-	log.Logger.Info().Msg("Create Band")
 	createBandRequest := request.CreateBandRequest{}
 	json.NewDecoder(r.Body).Decode(&createBandRequest)
 	controller.bandService.Create(createBandRequest)
@@ -41,7 +38,6 @@ func (controller *BandController) Create(w http.ResponseWriter, r *http.Request)
 // @Param band body request.CreateBandRequest true "Update band"
 // @Router /bands/{bandId} [patch]
 func (controller *BandController) Update(w http.ResponseWriter, r *http.Request) {
-	log.Logger.Info().Msg("Update Band")
 	updateBandRequest := request.UpdateBandRequest{}
 	err := json.NewDecoder(r.Body).Decode(&updateBandRequest)
 	helper.ErrorPanic(err)
@@ -59,7 +55,6 @@ func (controller *BandController) Update(w http.ResponseWriter, r *http.Request)
 // @Tags Bands
 // @Router /bands [get]
 func (controller *BandController) FindAll(w http.ResponseWriter, r *http.Request) {
-	log.Logger.Info().Msg("FindAll bands")
 	bandResponse := controller.bandService.FindAll()
 	w.Header().Add("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(bandResponse)
@@ -71,7 +66,6 @@ func (controller *BandController) FindAll(w http.ResponseWriter, r *http.Request
 // @Param bandId path string true "find band by id"
 // @Router /bands/{bandId} [get]
 func (controller *BandController) FindById(w http.ResponseWriter, r *http.Request) {
-	log.Logger.Info().Msg("FindById band")
 	bandId := r.PathValue("id")
 	id, err := strconv.Atoi(bandId)
 	helper.ErrorPanic(err)
@@ -88,7 +82,6 @@ func (controller *BandController) FindById(w http.ResponseWriter, r *http.Reques
 // @Param bandId path string true "find band by id"
 // @Router /bands/{bandId} [delete]
 func (controller *BandController) Delete(w http.ResponseWriter, r *http.Request) {
-	log.Logger.Info().Msg("Delete band")
 	bandId := r.PathValue("id")
 	id, err := strconv.Atoi(bandId)
 	helper.ErrorPanic(err)

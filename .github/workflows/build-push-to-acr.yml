@@ -1,0 +1,16 @@
+name: Build and push container to acr
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: build the docker image
+        run: docker build -t bandapi:$(date +%s) .

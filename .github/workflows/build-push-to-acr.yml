@@ -1,6 +1,7 @@
 name: Build and push container to acr
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main

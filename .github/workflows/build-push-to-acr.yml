@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4.1.1
 
       - name: docker build
-        run: docker build -t ${{ secrets.ACR_SERVER_LAB }}/bandapi:v1 .
+        run: docker build -t ${{ secrets.ACR_SERVER_LAB }}/bandapi:${GITHUB_SHA::7} .
 
       - name: az login
         uses: Azure/login@v2.0.0
@@ -28,4 +28,4 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: docker push
-        run: docker push ${{ secrets.ACR_SERVER_LAB}}/bandapi:v1
+        run: docker push ${{ secrets.ACR_SERVER_LAB}}/bandapi:${GITHUB_SHA::7}

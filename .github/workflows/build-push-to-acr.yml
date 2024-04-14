@@ -17,8 +17,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
+      - name: Generate Docker Image PR tag
+        id: docker_tag
+        run: |
+          GIT_SHA_SHORT=$(${GITHUB_SHA::7})
+          echo "DOCKER_IMAGE_TAG=$GIT_SHA_SHORT" >> $GITHUB_OUTPUT
+
       - name: docker build
-        run: docker build -t ${{ secrets.ACR_SERVER_LAB }}/bandapi:${GITHUB_SHA::7} .
+        run: docker build -t ${{ secrets.ACR_SERVER_LAB }}/bandapi:${{ steps.docker_tag.outputs.DOCKER_IMAGE_TAG }} .
 
       - name: az login
         uses: Azure/login@v2.0.0
@@ -28,4 +34,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: docker push
-        run: docker push ${{ secrets.ACR_SERVER_LAB}}/bandapi:${GITHUB_SHA::7}
+        run: |
+          az acr login --name ${{ secrets.ACR_REGISTRY_LAB }}
+          docker push ${{ secrets.ACR_SERVER_LAB}}/bandapi:${{ steps.docker_tag.outputs.DOCKER_IMAGE_TAG }}
+          docker logout

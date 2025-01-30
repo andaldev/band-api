@@ -8,4 +8,5 @@ RUN CGO_ENABLED=1 GOOS=linux go build -o /bandapi -a -ldflags '-linkmode externa
 
 FROM scratch
 COPY --from=builder /bandapi /bandapi
+EXPOSE 8080
 ENTRYPOINT ["/bandapi"]
